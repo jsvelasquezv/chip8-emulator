@@ -64,7 +64,9 @@ func main() {
   var p uint8
 
   for(!mustQuit){
+    
     position := cpu.pc // Position of the first byte for the opcode
+    // fmt.Println(cpu.pc)
     next_position := cpu.pc + 1 // Position of the second byte for the opcode
 
     first_byte := uint16(cpu.mem[position]) 
@@ -73,8 +75,8 @@ func main() {
     opcode = (first_byte << 8) | second_byte // Concat the bytes to for the opcode
 
     // opcode = cpu.mem[position] | cpu.mem[next_position] 
-    if next_position == MEMSIZE {
-      cpu.pc = 0x200
+    if next_position == MEMSIZE - 1 {
+      cpu.pc = 0
     } else {
       cpu.pc = next_position + 1// Update the program counter of the cpu
     }
